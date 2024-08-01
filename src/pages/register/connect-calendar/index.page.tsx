@@ -3,6 +3,7 @@ import * as M from '../styles'
 import * as S from './styles'
 
 import { ArrowRight } from 'phosphor-react'
+import { signIn } from 'next-auth/react'
 
 export default function RegisterPage() {
   // async function handleRegister(data: TRegisterFormData) {
@@ -24,7 +25,11 @@ export default function RegisterPage() {
       <S.ConnectBox>
         <S.ConnectItem>
           <Text>Google Calendar</Text>
-          <Button variant="secondary" size="sm">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => signIn('google')}
+          >
             Conectar
             <ArrowRight />
           </Button>
