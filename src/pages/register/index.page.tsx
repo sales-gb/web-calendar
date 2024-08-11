@@ -26,7 +26,7 @@ const registerFormSchema = z.object({
 
 type TRegisterFormData = z.infer<typeof registerFormSchema>
 
-export default function RegisterPage() {
+export default function Register() {
   const {
     register,
     handleSubmit,
