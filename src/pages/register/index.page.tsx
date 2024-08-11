@@ -18,7 +18,7 @@ const registerFormSchema = z.object({
       message: 'Usuário pode ter somente letras e hifens.',
     })
     .transform((username) => username.toLowerCase()),
-  fullname: z
+  name: z
     .string()
     .min(3, { message: 'Usuário precisa ter pelo menos 3 caracteres.' })
     .max(20),
@@ -47,9 +47,11 @@ export default function RegisterPage() {
   async function handleRegister(data: TRegisterFormData) {
     try {
       await api.post('/users', {
-        fullname: data.fullname,
+        name: data.name,
         username: data.username,
       })
+
+      await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err?.response?.data?.message) {
         alert(err.response.data.message)
@@ -90,13 +92,13 @@ export default function RegisterPage() {
           <Text size="sm">Nome completo</Text>
           <TextInput
             placeholder="Seu nome"
-            {...register('fullname')}
+            {...register('name')}
             crossOrigin={null}
             onPointerEnterCapture={null}
             onPointerLeaveCapture={null}
           />
-          {errors.fullname && (
-            <S.FormError size="sm">{errors.fullname.message}</S.FormError>
+          {errors.name && (
+            <S.FormError size="sm">{errors.name.message}</S.FormError>
           )}
         </label>
 
