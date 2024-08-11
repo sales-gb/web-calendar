@@ -13,10 +13,10 @@ datasource db {
 model User {
   id         String    @id @default(uuid())
   username   String    @unique
-  fullname   String
+  name       String
   email      String?   @unique
   avatar_url String?
-  createdAt  DateTime  @default(  now())
+  createdAt  DateTime  @default(now())
   
   accounts  Account[]
   sessions  Session[]
@@ -46,7 +46,7 @@ model Account {
  
 model Session {
   id              String   @id @default(cuid())
-  session_token   String
+  session_token   String   @unique
   user_id         String
   expires         DateTime
   user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
